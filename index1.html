@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+<!--
+<div ng-app="" ng-init="name='phat';member={name1:'long',name2:'bao',name3:'trung'}">
+  <p>Name : <input type="text" ng-bind="{{name}}" ng-model="name"></p>
+  <p>Age: <input type="text" name="age" ng-model='age'></p>
+  <h1>Hello {{name}}</h1>
+  <h1 ng-bind='age'></h1>
+  <h1 ng-bind="member.name1"></h1>
+  <h1>{{member.name1}}</h1>
+
+</div>
+
+<div ng-app='myApp' ng-controller='myController'">
+	<p>{{'My name is '+ myName}}</p>
+</div>
+-->
+<div ng-app='App1' ng-controller='Ctrl1'>
+	{{username}}
+</div>
+<script>
+	/*
+	app = angular.module('myApp',[]);
+	app.controller('myController', function($scope) {
+		$scope.myName = 'Long';
+	});
+	*/
+
+	app2 = angular.module('App1',[]);
+	app2.controller('Ctrl1', function($scope) {
+		$scope.username = 'ngophat';
+	});
+</script>
+
+</body>
+</html>

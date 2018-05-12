@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 5</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app='myApp'>
+	<div ng-controller="myCtrl">
+		<input type="text" name="name" ng-model='name'>
+		<button ng-click="getNotice(name)">Click me</button>
+		<p>{{welcome}}</p>
+	</div>
+
+	<script>
+		angular.module('myApp',[]).controller('myCtrl', function($scope, $http) {
+
+			$scope.getNotice = function(name) {
+				$http.post("index5.php?id=admin",{'name':name,'age':'18'}).then(function(response) {
+					$scope.welcome = response.data;
+					//console.log(response);
+				});
+			}
+		});
+	</script>
+</body>
+</html>

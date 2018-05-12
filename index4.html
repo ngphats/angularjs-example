@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 4</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app='myApp'>
+
+	<div ng-controller='myCtrl'>
+		<i>Add filter</i>
+		<input type="text" name="filterName" ng-model='filterName'/>
+		<ul ng-repeat="name in names | filter:filterName">
+			<li>{{name | uppercase}}</li>
+		</ul>
+	</div>
+
+	<div ng-controller='myCtrl2'>
+		<button ng-click="orderByMe('name')">Name</button>
+		<button ng-click="orderByMe('country')">Country</button>
+		<table>
+			<tr>
+				<td>name</td>
+				<td>Country</td>
+			</tr>
+			<tr ng-repeat="x in names | orderBy:orderValue">
+				<td>{{x.name}}</td>
+				<td>{{x.country}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		app = angular.module('myApp',[]);
+		
+		app.controller('myCtrl', function($scope) {
+			$scope.names = ['Jani','Carl','Margareth','Hege','Joe','Gustav','Birgit','Mary','Kai'];
+		});
+
+		app.controller('myCtrl2', function($scope) {
+			$scope.names = [  
+				{name:'Jani',country:'Norway'},
+		        {name:'Carl',country:'Sweden'},
+		        {name:'Margareth',country:'England'},
+		        {name:'Hege',country:'Norway'},
+		        {name:'Joe',country:'Denmark'},
+		        {name:'Gustav',country:'Sweden'},
+		        {name:'Birgit',country:'Denmark'},
+		        {name:'Mary',country:'England'},
+		        {name:'Kai',country:'Norway'}
+			];
+
+			$scope.orderByMe = function(order = '') {
+				$scope.orderValue = order;
+			};
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 7</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        var app = angular.module('MyApp', [])
+        app.controller('MyController', function ($scope, $window) {
+            $scope.Customers = [
+                { Name: "John Hammond", Country: "United States" },
+                { Name: "Mudassar Khan", Country: "India" },
+                { Name: "Suzanne Mathews", Country: "France" },
+                { Name: "Robert Schidner", Country: "Russia" }
+                ];
+ 
+            $scope.Add = function () {
+                //Add the new item to the Array.
+                var customer = {};
+                customer.Name = $scope.Name;
+                customer.Country = $scope.Country;
+                $scope.Customers.push(customer);
+ 
+                //Clear the TextBoxes.
+                $scope.Name = "";
+                $scope.Country = "";
+            };
+ 
+            $scope.Remove = function (index) {
+                //Find the record using Index from Array.
+                var name = $scope.Customers[index].Name;
+                if ($window.confirm("Do you want to delete: " + name)) {
+                    //Remove the item from Array using Index.
+                    $scope.Customers.splice(index, 1);
+                }
+            }
+        });
+    </script>
+    <div ng-app="MyApp" ng-controller="MyController">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th></th>
+            </tr>
+            <tbody ng-repeat="m in Customers">
+                <tr>
+                    <td><input type="text" value="{{m.Name}}" /></td>
+                    <td><input type="text" value="{{m.Country}}" /></td>
+                    <td><input type="button" ng-click="Remove($index)" value="Remove" /></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><input type="text" ng-model="Name" /></td>
+                    <td><input type="text" ng-model="Country" /></td>
+                    <td><input type="button" ng-click="Add()" value="Add" /></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 9</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+<body>
+
+	<div ng-app='myApp' ng-controller='myCtrl'>
+		<header>
+			<nav>
+				<ul>
+					<li ng-repeat="x in nav"><a href="{{x.url}}">{{x.name}}</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<div id="red" style="height: 800px;background: red">Red</div>
+			<div id="blue" style="height: 800px;background: blue">Blue</div>
+			<div id="green" style="height: 800px;background: green">Green</div>
+		</main>
+		<div ng-view></div>
+	</div>
+
+	<script type="text/javascript">
+		var app = angular.module('myApp',['ngRoute']);
+		app.config(function($routeProvider) {
+			$routeProvider
+			.when('/red', {templateUrl: "index9.html#red"})
+			.when('/blue', {templateUrl: "index9.html#blue"})
+			.when('/green', {templateUrl: "index9.html#green"})
+		});
+
+		app.controller('myCtrl', function($scope) {
+			$scope.nav = [
+				{name:'Red', url: '#red'},
+				{name:'Green', url: '#green'},
+				{name:'Blue', url: '#blue'}
+			];
+		});
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo list with Angular JS</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<ul>
+			<li ng-repeat="x in todolist">{{x.name}}<button ng-click="removeTask($index)">x</button></li>
+			<input type="text" name="task" ng-model='task'><button ng-click='addTask()'>Add</button>
+			<span>{{errors}}</span>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		angular.module('myApp',[]).controller('myCtrl', function($scope) {
+			$scope.todolist = [
+			];
+
+			$scope.addTask = function() {
+				if ($scope.task == null) {
+					return;
+				} 
+
+				$scope.errors = '';
+				for(var i=0; i<$scope.todolist.length; i++) {
+					if ($scope.todolist[i].name == $scope.task) {
+						$scope.errors = 'Task added before!';
+						break;
+					}
+				}
+
+				if ($scope.errors == '') {
+					$scope.todolist.push({name: $scope.task});
+				}
+			};
+
+			$scope.removeTask = function(item) {
+				$scope.todolist.splice(item,1);
+			}
+		});
+	</script>
+
+</body>
+</html>

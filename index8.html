@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 6</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<button ng-click=addNew()>Add</button>
+		<ul ng-repeat="x in names">
+			<li><input type="file" name="img[]" ng-model="x.name"><button ng-click="remoteItem($index)">Remote</button></li>
+		</ul>
+	</div>
+
+	<script>
+		angular.module('myApp',[]).controller('myCtrl', function($scope) {
+			
+			$scope.names = [
+				{name: '', value: ''},
+			];
+
+			$scope.addNew = function() {
+				$scope.names.push({name:'',value:''});
+			};
+
+			$scope.remoteItem = function(item) {
+				$scope.names.splice(item,1);
+			};
+		});
+	</script>
+
+</body>
+</html>
