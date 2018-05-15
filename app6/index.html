@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+    <head>
+        <title ng-bind='title'></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    </head>
+
+<body>
+
+<nav>
+    <a href="#!">Home</a>
+    <a href="#!admin">Admin</a>
+    <a href="#!admin/user/create">Create user</a>
+</nav>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "home.htm"
+    })
+    .when("/home", {
+        templateUrl : "home.htm"
+    })
+    .when("/admin", {
+        templateUrl : "admin.htm",
+        controller : "adminCtrl"
+    })
+    .when("/admin/user/index", {
+        templateUrl : "admin.htm",
+        controller : "indexUserCtrl"
+    })    
+    .when("/admin/user/create", {
+        templateUrl : "admin.htm",
+        controller : "createUserCtrl"
+    })
+});
+
+app.run(function($rootScope) {
+    $rootScope.title = 'Application';
+});
+
+// contact controller
+app.controller('adminCtrl', function($scope) {
+    $scope.ctrl = 'user/index';
+});
+
+// user controller
+app.controller('indexUserCtrl', function($scope) {
+    $scope.ctrl = 'user/index';
+});
+
+// create controller
+app.controller('createUserCtrl', function($scope) {
+    $scope.ctrl = 'user/create';
+});
+
+</script>
+</body>
+</html>

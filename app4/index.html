@@ -4,7 +4,43 @@
 	<title>Applicaton 4</title>
 	<script type="text/javascript" src="../angular.min.js"></script>
 </head>
-<body>
+<body ng-app='myApp'>
+
+<div ng-controller='myCtrl'>
+	<select ng-model='selectRequestName' ng-options="x for x in optionsRequest"></select>
+	<button ng-click='sendRequest(selectRequestName)'>Send request</button>
+	<p ng-bind='requestType'></p>
+
+	<input type="text" ng-model='userName'>
+	<input type="password" ng-model='passWord'>
+	<button ng-click='login()'>Login</button>
+</div>
+
+<script type="text/javascript">
+	angular.module('myApp', []).controller('myCtrl', function($scope, $http) {
+		$scope.optionsRequest = ["GET", "POST", "PUT", "DELETE"];
+		$scope.selectRequestName = 'GET';
+		$scope.sendRequest = function(methodName) {
+			$http({
+				method: methodName,
+				url: 'process.php'
+			}).then(function(response) {
+				console.log(response.data);
+				$scope.requestType = response.data;
+			});
+		}
+
+		$scope.login = function() {
+			$http({
+				method: 'POST',
+				url: 'process.php',
+				data: '{"name":"phat"}'
+			}).then(function(response) {
+				console.log(response.data);
+			});
+		};
+	});
+</script>
 
 </body>
 </html>

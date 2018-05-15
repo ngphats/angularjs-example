@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example 10</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app='myApp'>
+
+	{{color}}
+
+	<div ng-controller='firstCtrl'>
+		{{color}}
+	</div>
+
+	<div ng-controller='secondCtrl'>
+		{{color}}
+	</div>
+
+	<div ng-include="'app5/admin.htm'"></div>
+
+<script type="text/javascript">
+	app = angular.module('myApp',[]);
+	app.run(function($rootScope) {
+		$rootScope.color = 'Red';
+	});
+
+	app.controller('firstCtrl', function($scope) {
+		$scope.color = 'blue';
+	});
+
+	app.controller('secondCtrl', function($scope) {
+
+	});
+</script>
+</body>
+</html>

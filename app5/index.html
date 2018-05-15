@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title ng-bind='title'></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+<a href="#!">Home</a>
+<a href="#!admin">Admin</a>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "home.htm"
+    })
+    .when("/home", {
+        templateUrl : "home.htm"
+    })
+    .when("/admin", {
+        templateUrl : "admin.htm",
+        controller : "adminIndex"
+    })   
+});
+
+app.run(function($rootScope) {
+    $rootScope.page = 'Home page';
+});
+
+app.controller('adminIndex', function($scope) {
+    $scope.path = 'index';
+});
+
+</script>
+</body>
+</html>

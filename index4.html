@@ -31,7 +31,7 @@
 
 	<script type="text/javascript">
 		app = angular.module('myApp',[]);
-		
+
 		app.controller('myCtrl', function($scope) {
 			$scope.names = ['Jani','Carl','Margareth','Hege','Joe','Gustav','Birgit','Mary','Kai'];
 		});
@@ -48,7 +48,6 @@
 		        {name:'Mary',country:'England'},
 		        {name:'Kai',country:'Norway'}
 			];
-
 			$scope.orderByMe = function(order = '') {
 				$scope.orderValue = order;
 			};

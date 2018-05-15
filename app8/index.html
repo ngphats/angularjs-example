@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload file</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+	<script type="text/javascript" src="ng-file-upload.js"></script>	
+</head>
+<body ng-app='myApp'  ng-init="imgNum=1">
+
+	<div ng-controller="myCtrl">
+		<p ng-repeat="image in images track by $index"><img ng-src="{{image}}" width="150" /></p>
+		<button ngf-select="upload($files)">Add file</button>
+	</div>
+
+	<script>
+
+		var exampleApp = angular.module('myApp', ['ngFileUpload']);
+
+		exampleApp.controller('myCtrl', ['$scope', 'Upload', function($scope, Upload) {
+			$scope.images = [];
+			$scope.upload = function (files) {
+				if (files && files.length) {
+					for (var i = 0; i < files.length; i++) {
+						Upload.upload({
+							url: 'upload.php',
+							fields: {'prefix': '_'},
+							file: files[i]
+						}).progress(function (evt) {
+							var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+							console.log('progress: ' + progressPercentage + '% Filename: ' + evt.config.file.name);
+						}).success(function (data, status, headers, config) {
+							console.log(data);
+							$scope.images.push(data.uploaded);
+						}).error(function (data, status, headers, config) {
+							console.log('error status: ' + status);
+						})
+					}
+				}
+			}
+		}]);
+	</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+	<title>Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="app/myapp.js"></script>
+</head>
+<body>
+	<div ng-include="'view/layouts/header.htm'"></div>
+		<div ng-view></div>
+	<div ng-include="'view/layouts/footer.htm'"></div>
+</body>
+</html>
